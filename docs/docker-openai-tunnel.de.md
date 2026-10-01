@@ -1,5 +1,8 @@
 # Picnic mit Docker und OpenAI Secure MCP Tunnel
 
+[English](docker-openai-tunnel.en.md) · [Nederlands](docker-openai-tunnel.nl.md)
+[Français](docker-openai-tunnel.fr.md) · [Deutsch](docker-openai-tunnel.de.md)
+
 Mit dieser Compose-Datei laufen der offizielle OpenAI-Tunnel-Client und der
 gebaute Picnic-MCP-Server gemeinsam in einem Container. Der Client startet
 Picnic als STDIO-Unterprozess. Die Verbindung benötigt ausgehenden HTTPS-Zugriff

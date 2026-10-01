@@ -1,8 +1,11 @@
 [![MseeP.ai Security Assessment Badge](https://mseep.net/pr/ivo-toby-mcp-picnic-badge.png)](https://mseep.ai/app/ivo-toby-mcp-picnic)
 
 > **Docker deployments:** choose the standalone HTTP server (`docker-compose.yml`)
-> or OpenAI Secure MCP Tunnel (`docker-compose.tunnel.yml`). See the
-> [German tunnel setup guide](docs/docker-openai-tunnel.de.md).
+> or OpenAI Secure MCP Tunnel (`docker-compose.tunnel.yml`). Read the tunnel setup
+> guide in [English](docs/docker-openai-tunnel.en.md),
+> [Nederlands](docs/docker-openai-tunnel.nl.md),
+> [Français](docs/docker-openai-tunnel.fr.md), or
+> [Deutsch](docs/docker-openai-tunnel.de.md).
 
 # MCP Picnic - AI-Powered Grocery Shopping Assistant
 
@@ -374,7 +377,7 @@ Notes:
   `/health`.
 - The tunnel Compose file builds the Picnic STDIO server from this checkout and
   runs it with the official OpenAI Secure MCP Tunnel client. See the
-  [setup guide](docs/docker-openai-tunnel.de.md).
+  [English setup guide](docs/docker-openai-tunnel.en.md).
 - The tunnel container runs as a non-root user (UID `1000`).
 - Both deployments persist session data in the `picnic-data` volume mounted at
   `/app/data`.
