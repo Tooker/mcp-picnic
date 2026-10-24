@@ -2,7 +2,7 @@ services:
   mcp-picnic:
     container_name: mcp-picnic
     hostname: mcp-picnic
-    image: ghcr.io/ivo-toby/mcp-picnic:latest
+    image: ghcr.io/tooker/mcp-picnic:latest
     restart: unless-stopped
     env_file:
       - .env
