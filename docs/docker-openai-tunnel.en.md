@@ -46,10 +46,15 @@ image.
 From the project directory:
 
 ```bash
-docker compose -f docker-compose.tunnel.yml up -d --build
+docker compose -f docker-compose.tunnel.yml pull
+docker compose -f docker-compose.tunnel.yml up -d --no-build
 docker compose -f docker-compose.tunnel.yml ps
 docker compose -f docker-compose.tunnel.yml logs --tail=100 -f mcp-picnic
 ```
+
+The image `ghcr.io/tooker/mcp-picnic:tunnel` is built by GitHub Actions for
+AMD64 and ARM64. Use the same commands to update. See
+[image builds and registry access](docker-images.md) for authentication and local builds.
 
 The local tunnel status page is available at
 [http://localhost:8091/ui](http://localhost:8091/ui). The port is bound to
@@ -115,7 +120,7 @@ npm test
 npm run typecheck
 npm run lint
 npm run build
-docker compose -f docker-compose.tunnel.yml build
+docker build -f Dockerfile.tunnel -t mcp-picnic:tunnel .
 docker run --rm -i --network none --read-only \
   --tmpfs /tmp:mode=1777 --tmpfs /app/data:uid=1000,gid=1000,mode=700 \
   --cap-drop ALL --security-opt no-new-privileges:true \

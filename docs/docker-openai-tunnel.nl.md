@@ -47,10 +47,15 @@ image gekopieerd.
 Voer dit uit in de projectmap:
 
 ```bash
-docker compose -f docker-compose.tunnel.yml up -d --build
+docker compose -f docker-compose.tunnel.yml pull
+docker compose -f docker-compose.tunnel.yml up -d --no-build
 docker compose -f docker-compose.tunnel.yml ps
 docker compose -f docker-compose.tunnel.yml logs --tail=100 -f mcp-picnic
 ```
+
+GitHub Actions bouwt `ghcr.io/tooker/mcp-picnic:tunnel` voor AMD64 en ARM64.
+Gebruik dezelfde opdrachten om bij te werken. Zie
+[image-builds en registrytoegang](docker-images.md) voor aanmelden en lokaal bouwen.
 
 De lokale tunnelstatuspagina staat op
 [http://localhost:8091/ui](http://localhost:8091/ui). De poort is alleen
@@ -118,7 +123,7 @@ npm test
 npm run typecheck
 npm run lint
 npm run build
-docker compose -f docker-compose.tunnel.yml build
+docker build -f Dockerfile.tunnel -t mcp-picnic:tunnel .
 docker run --rm -i --network none --read-only \
   --tmpfs /tmp:mode=1777 --tmpfs /app/data:uid=1000,gid=1000,mode=700 \
   --cap-drop ALL --security-opt no-new-privileges:true \

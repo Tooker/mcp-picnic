@@ -47,10 +47,15 @@ nicht in das Image kopiert.
 Im Projektverzeichnis:
 
 ```bash
-docker compose -f docker-compose.tunnel.yml up -d --build
+docker compose -f docker-compose.tunnel.yml pull
+docker compose -f docker-compose.tunnel.yml up -d --no-build
 docker compose -f docker-compose.tunnel.yml ps
 docker compose -f docker-compose.tunnel.yml logs --tail=100 -f mcp-picnic
 ```
+
+Das Image `ghcr.io/tooker/mcp-picnic:tunnel` wird von GitHub Actions für
+AMD64 und ARM64 gebaut. Dieselben Befehle aktualisieren das Image. Hinweise
+zum Registry-Zugriff und lokalen Build stehen unter [Image-Builds](docker-images.md).
 
 Die lokale Tunnel-Statusseite ist unter
 [http://localhost:8091/ui](http://localhost:8091/ui) erreichbar. Der Port ist
@@ -118,7 +123,7 @@ npm test
 npm run typecheck
 npm run lint
 npm run build
-docker compose -f docker-compose.tunnel.yml build
+docker build -f Dockerfile.tunnel -t mcp-picnic:tunnel .
 docker run --rm -i --network none --read-only \
   --tmpfs /tmp:mode=1777 --tmpfs /app/data:uid=1000,gid=1000,mode=700 \
   --cap-drop ALL --security-opt no-new-privileges:true \

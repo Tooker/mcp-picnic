@@ -1,6 +1,6 @@
 services:
   mcp-picnic:
-    image: mcp-picnic:tunnel
+    image: ghcr.io/tooker/mcp-picnic:tunnel
     build:
       context: .
       dockerfile: Dockerfile.tunnel

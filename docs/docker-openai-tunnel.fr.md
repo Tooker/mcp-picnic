@@ -47,10 +47,15 @@ copiés dans l’image.
 Depuis le répertoire du projet :
 
 ```bash
-docker compose -f docker-compose.tunnel.yml up -d --build
+docker compose -f docker-compose.tunnel.yml pull
+docker compose -f docker-compose.tunnel.yml up -d --no-build
 docker compose -f docker-compose.tunnel.yml ps
 docker compose -f docker-compose.tunnel.yml logs --tail=100 -f mcp-picnic
 ```
+
+GitHub Actions construit `ghcr.io/tooker/mcp-picnic:tunnel` pour AMD64 et ARM64.
+Utilisez les mêmes commandes pour les mises à jour. Consultez
+[les builds et l’accès au registre](docker-images.md) pour l’authentification et les builds locaux.
 
 La page locale d’état du tunnel est accessible à
 [http://localhost:8091/ui](http://localhost:8091/ui). Le port est lié à
@@ -123,7 +128,7 @@ npm test
 npm run typecheck
 npm run lint
 npm run build
-docker compose -f docker-compose.tunnel.yml build
+docker build -f Dockerfile.tunnel -t mcp-picnic:tunnel .
 docker run --rm -i --network none --read-only \
   --tmpfs /tmp:mode=1777 --tmpfs /app/data:uid=1000,gid=1000,mode=700 \
   --cap-drop ALL --security-opt no-new-privileges:true \

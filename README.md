@@ -358,7 +358,8 @@ tunnel. Set `HTTP_AUTH_TOKEN` in `.env` (generate a value with
 `openssl rand -hex 32`), then run:
 
 ```bash
-docker compose up -d
+docker compose pull
+docker compose up -d --no-build
 curl http://localhost:3000/health
 ```
 
@@ -367,15 +368,19 @@ In addition to the Picnic credentials, set `CONTROL_PLANE_TUNNEL_ID` and
 `CONTROL_PLANE_API_KEY` in `.env`, then run:
 
 ```bash
-docker compose -f docker-compose.tunnel.yml up -d --build
+docker compose -f docker-compose.tunnel.yml pull
+docker compose -f docker-compose.tunnel.yml up -d --no-build
 curl http://localhost:8091/readyz
 ```
 
 Notes:
+- GitHub Actions publishes AMD64 and ARM64 images as
+  `ghcr.io/tooker/mcp-picnic:latest` (standalone) and `:tunnel` (Secure MCP Tunnel).
+  See [image builds and registry access](docs/docker-images.md) for details.
 - The standalone HTTP Compose file uses the published image. Its MCP endpoint is
   available on port `3000`; `HTTP_AUTH_TOKEN` protects all HTTP endpoints except
   `/health`.
-- The tunnel Compose file builds the Picnic STDIO server from this checkout and
+- The tunnel Compose file uses the published Picnic STDIO server image and
   runs it with the official OpenAI Secure MCP Tunnel client. See the
   [English setup guide](docs/docker-openai-tunnel.en.md).
 - The tunnel container runs as a non-root user (UID `1000`).
